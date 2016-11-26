@@ -86,21 +86,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BotConnector.cs" />
-    <Compile Include="DataModule.cs" />
+    <Compile Include="CommandSetups\Commander.cs" />
+    <Compile Include="CommandSetups\PunishmentCommands.cs" />
+    <Compile Include="CommandSetups\PunishmentCommands\Strike.cs" />
+    <Compile Include="CommandSetups\TokenCommands.cs" />
+    <Compile Include="CommandSetups\TokenCommands\DeToken.cs" />
+    <Compile Include="CommandSetups\TokenCommands\GetToken.cs" />
+    <Compile Include="CommandSetups\XPCommands.cs" />
+    <Compile Include="CommandSetups\XPCommands\XP.cs" />
+    <Compile Include="Modules\DataModule.cs" />
     <Compile Include="Modules.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BotUser.cs" />
-    <Compile Include="PunishmentModule.cs" />
-    <Compile Include="SaveModule.cs" />
-    <Compile Include="TokenModule.cs" />
-    <Compile Include="UserModule.cs" />
-    <Compile Include="XPModule.cs" />
+    <Compile Include="Modules\PunishmentModule.cs" />
+    <Compile Include="Modules\SaveModule.cs" />
+    <Compile Include="Modules\TokenModule.cs" />
+    <Compile Include="Modules\UserModule.cs" />
+    <Compile Include="Modules\XPModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
