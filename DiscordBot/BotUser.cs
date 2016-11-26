@@ -88,13 +88,17 @@ internal class BotUser
     private const int NUMSTRIKESFORKICK = 2;
     private TimeSpan TIMEBETWEENXPGAINS = new TimeSpan(0, 1, 0);
 
+    /* Modules */
+    SaveModule BotSaveModule;
+
     private List<UnspecificUserInfo> UsersInfo;
 
     // Classes constructor
     public BotUser()
     {
-        // When this class is constructed, attempt to load previous save data.
-        UsersInfo = LoadUserData();
+        // Create a SaveModule named BotSaveModule to handle the saving / loading of user info data.
+        BotSaveModule = new SaveModule("UserData.json");
+        UsersInfo = BotSaveModule.LoadUserData();
     }
 
     // Gets the info about specified user.
@@ -308,39 +312,9 @@ internal class BotUser
         UsersInfo[index] = NewUserInfo;
 
         // As the data has been updated, save it to a file to be sure data has been saved in case of unexpected crashes. (and onexit plain not working :P)
-        SaveUserData(UsersInfo);
+        BotSaveModule.SaveUserData(UsersInfo);
 
         // TODO double check if this creates a new user if the user doesnt exist!!!
-    }
-
-    // Saving / Loading Section TODO Make this its own class?
-
-    // Saves the inputted user's info to a (json) file for multiple program runs to use. TODO Make this use a database sothat there can be multiple hosts?
-    public static void SaveUserData(List<UnspecificUserInfo> input)
-    {
-        // Serialize JSON to a string and then write string to a file
-        File.WriteAllText(@"UserData.json", JsonConvert.SerializeObject(input));
-    }
-
-    // Returns the User's their info, read form a save file.
-    public static List<UnspecificUserInfo> LoadUserData()
-    {
-        // Open and Close the file sothat if it does not exist it gets created.
-        TextWriter EnsureFileExistThingy = new StreamWriter("UserData.json", true);
-        EnsureFileExistThingy.Close();
-
-        // Read file into a string and deserialize JSON to a user struct list.
-        List<UnspecificUserInfo> UserInfoData = JsonConvert.DeserializeObject<List<UnspecificUserInfo>>(File.ReadAllText("UserData.json"));
-
-        // If the read info is null (aka there probably wasent a recent save)...
-        if (UserInfoData == null)
-        {
-            // Create a new (blank) list of user info.
-            UserInfoData = new List<UnspecificUserInfo>();
-        }
-
-        // Return the (newly created?) user data
-        return UserInfoData;
     }
 
     // Token Section TODO Make this its own class?
