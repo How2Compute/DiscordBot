@@ -77,11 +77,11 @@ internal class Program
             {
                 if (e.GetArg("UserToGetHashFor") != "") // If the user it needs to hash is specified get that users hash
                 {
-                    await e.Channel.SendMessage($"{e.GetArg("UserToGetHashFor")}'s hash is: {User.GetUserTrackHash(User.GetUserByName(e.GetArg("UserToGetHashFor"), e.Channel).User.Id)}!"); // TODO make this be more checking as it may get the wrong user or something
+                    await e.Channel.SendMessage($"{e.GetArg("UserToGetHashFor")}'s hash is: {User.Modules.TokenModule.GetUserTrackHash(User.GetUserByName(e.GetArg("UserToGetHashFor"), e.Channel).User.Id)}!"); // TODO make this be more checking as it may get the wrong user or something
                 }
                 else // If there isn't another user specified get the sending users hash.
                 {
-                    await e.Channel.SendMessage($"{e.User.NicknameMention}'s hash is: {User.GetUserTrackHash(e.User)}!");
+                    await e.Channel.SendMessage($"{e.User.NicknameMention}'s hash is: {User.Modules.TokenModule.GetUserTrackHash(e.User)}!");
                 }
             });
 
@@ -93,7 +93,7 @@ internal class Program
             .Do(async e =>
             {
                 await e.Channel.SendMessage("Atempting to resolve hash..."); // TODO remove cuz this is only for debugging
-                await e.Channel.SendMessage($"{e.GetArg("Hash")} is actually #{User.TrackHashToID(e.GetArg("Hash"))} which in its turn is {User.GetUserByID(User.TrackHashToID(e.GetArg("Hash")), e.Server).User.NicknameMention}!"); // TODO make this be more checking as it may get the wrong user or something
+                await e.Channel.SendMessage($"{e.GetArg("Hash")} is actually #{User.Modules.TokenModule.TrackHashToID(e.GetArg("Hash"))} which in its turn is {User.GetUserByID(User.Modules.TokenModule.TrackHashToID(e.GetArg("Hash")), e.Server).User.NicknameMention}!"); // TODO make this be more checking as it may get the wrong user or something
             });
         // Connect the bot to the discord API.
         Bot.ExecuteAndWait(async () =>

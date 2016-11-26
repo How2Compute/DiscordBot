@@ -89,7 +89,7 @@ internal class BotUser
     private TimeSpan TIMEBETWEENXPGAINS = new TimeSpan(0, 1, 0);
 
     /* Modules */
-    SaveModule BotSaveModule;
+    public Modules Modules;
 
     private List<UnspecificUserInfo> UsersInfo;
 
@@ -97,8 +97,9 @@ internal class BotUser
     public BotUser()
     {
         // Create a SaveModule named BotSaveModule to handle the saving / loading of user info data.
-        BotSaveModule = new SaveModule("UserData.json");
-        UsersInfo = BotSaveModule.LoadUserData();
+        Modules = new Modules();
+
+        UsersInfo = Modules.SaveModule.LoadUserData();
     }
 
     // Gets the info about specified user.
@@ -312,32 +313,11 @@ internal class BotUser
         UsersInfo[index] = NewUserInfo;
 
         // As the data has been updated, save it to a file to be sure data has been saved in case of unexpected crashes. (and onexit plain not working :P)
-        BotSaveModule.SaveUserData(UsersInfo);
+        Modules.SaveModule.SaveUserData(UsersInfo);
 
         // TODO double check if this creates a new user if the user doesnt exist!!!
     }
-
-    // Token Section TODO Make this its own class?
-
-    // Base64 encodes the user's id sothat it looks a bit more like a token.
-    public string GetUserTrackHash(ulong UserID)
-    {
-        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(UserID.ToString());
-        return System.Convert.ToBase64String(plainTextBytes);
-    }
-
-    // BEING DEPRICATED!!! Get's the inputted users tracking has (base64 encoded discord user ID)
-    public string GetUserTrackHash(Discord.User User)
-    {
-        return GetUserTrackHash(User.Id);
-    }
-
-    // Decode the tracking hash (base64 encoded discord user ID).
-    public ulong TrackHashToID(string base64EncodedData)
-    {
-        var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-        return (ulong)Convert.ToInt64(System.Text.Encoding.UTF8.GetString(base64EncodedBytes));
-    }
+    
 }
 
 // TODO make 1 central update function that accept like the user and the new struct or only the new struct (for server specific user info?)
