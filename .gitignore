@@ -1,5 +1,4 @@
-# Ignore the BotConnector file sothat it can safely contain the bot token
-*/BotConnector.cs
+
 
 
 ## Ignore Visual Studio temporary files, build results, and
