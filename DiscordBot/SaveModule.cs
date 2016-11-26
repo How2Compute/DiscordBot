@@ -5,10 +5,12 @@ using System.IO;
 internal class SaveModule
 {
     private static string SavePath;
+    private Modules Modules;
 
     // Construct the SaveModule with a given path
-    public SaveModule(string Path)
+    public SaveModule(Modules BotModules, string Path)
     {
+        Modules = BotModules;
         SavePath = Path;
     }
 

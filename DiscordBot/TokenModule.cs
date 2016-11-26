@@ -1,7 +1,17 @@
-﻿using System;
+﻿using Discord;
+using Discord.Commands;
+using System;
+using System.Collections.Generic;
 
 internal class TokenModule
 {
+    Modules Modules;
+
+    public TokenModule(Modules BotModules)
+    {
+        Modules = BotModules;
+        
+    }
 
     // Base64 encodes the user's id sothat it looks a bit more like a token.
     public string GetUserTrackHash(ulong UserID)
