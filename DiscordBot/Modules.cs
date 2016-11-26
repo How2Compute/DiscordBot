@@ -11,9 +11,9 @@ internal class Modules
 
     public Modules()
     {
+        SaveModule = new SaveModule(this, "UserData.json");
         DataModule = new DataModule(this);
         PunishmentModule = new PunishmentModule(this);
-        SaveModule = new SaveModule(this, "UserData.json");
         TokenModule = new TokenModule(this);
         UserModule = new UserModule(this);
         XPModule = new XPModule(this);
