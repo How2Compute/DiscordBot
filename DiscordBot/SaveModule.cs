@@ -4,7 +4,7 @@ using System.IO;
 
 internal class SaveModule
 {
-    string SavePath;
+    private static string SavePath;
 
     // Construct the SaveModule with a given path
     public SaveModule(string Path)
