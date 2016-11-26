@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.Commands;
-using System.Diagnostics;
+using System;
 
-class Program
+internal class Program
 {
-    static void Main(string[] args) => new Program().Start();
+    private static void Main(string[] args) => new Program().Start();
 
     private DiscordClient Bot;
-    BotUser User = new BotUser();
+    private BotUser User = new BotUser();
 
-    void OnProcessExit(object sender, EventArgs e)
+    private void OnProcessExit(object sender, EventArgs e)
     {
         Console.WriteLine("I'm out of here");
     }
-
 
     public void Start()
     {
@@ -55,7 +49,7 @@ class Program
                 {
                     if (e.User.GetPermissions(e.Channel).ManageChannel)
                     {
-                        if(User.GetUserByName(e.GetArg("UserToStrike"), e.Channel).WasFound)
+                        if (User.GetUserByName(e.GetArg("UserToStrike"), e.Channel).WasFound)
                         {
                             await e.Channel.SendMessage($"You just got striked {User.GetUserByName(e.GetArg("UserToStrike"), e.Channel).User.Mention}!");
                             User.ChangeStrikes(e.Server, User.GetUserByName(e.GetArg("UserToStrike"), e.Channel).User.Id, 1);
@@ -98,17 +92,16 @@ class Program
             .Parameter("Hash", ParameterType.Optional)
             .Do(async e =>
             {
-                await e.Channel.SendMessage("Atempting to resolve hash..."); // TODO remove cuz this is only for debugging 
-                    await e.Channel.SendMessage($"{e.GetArg("Hash")} is actually #{User.TrackHashToID(e.GetArg("Hash"))} which in its turn is {User.GetUserByID(User.TrackHashToID(e.GetArg("Hash")), e.Server).User.NicknameMention}!"); // TODO make this be more checking as it may get the wrong user or something
+                await e.Channel.SendMessage("Atempting to resolve hash..."); // TODO remove cuz this is only for debugging
+                await e.Channel.SendMessage($"{e.GetArg("Hash")} is actually #{User.TrackHashToID(e.GetArg("Hash"))} which in its turn is {User.GetUserByID(User.TrackHashToID(e.GetArg("Hash")), e.Server).User.NicknameMention}!"); // TODO make this be more checking as it may get the wrong user or something
             });
         // Connect the bot to the discord API.
-        Bot.ExecuteAndWait(async () => {
+        Bot.ExecuteAndWait(async () =>
+        {
             // TODO make this connect to api token
             BotConnector MyBotConnector = new BotConnector();
             await Bot.Connect(BotConnector.GetAPIToken(), TokenType.Bot);
             Bot.SetGame("Testing biatch!");
         });
     }
-
-    
 }
