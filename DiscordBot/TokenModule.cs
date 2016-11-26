@@ -1,16 +1,13 @@
 ﻿using Discord;
-using Discord.Commands;
 using System;
-using System.Collections.Generic;
 
 internal class TokenModule
 {
-    Modules Modules;
+    private Modules Modules;
 
     public TokenModule(Modules BotModules)
     {
         Modules = BotModules;
-        
     }
 
     // Base64 encodes the user's id sothat it looks a bit more like a token.
@@ -30,6 +27,6 @@ internal class TokenModule
     public ulong TrackHashToID(string base64EncodedData)
     {
         var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-        return (ulong) Convert.ToInt64(System.Text.Encoding.UTF8.GetString(base64EncodedBytes));
+        return (ulong)Convert.ToInt64(System.Text.Encoding.UTF8.GetString(base64EncodedBytes));
     }
 }

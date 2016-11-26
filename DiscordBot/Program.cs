@@ -124,14 +124,13 @@ internal class Program
                 await e.Channel.SendMessage($"{e.GetArg("Hash")} is actually #{User.Modules.TokenModule.TrackHashToID(e.GetArg("Hash"))} which in its turn is {User.Modules.UserModule.GetUserByID(User.Modules.TokenModule.TrackHashToID(e.GetArg("Hash")), e.Server).User.NicknameMention}!"); // TODO make this be more checking as it may get the wrong user or something
             });
 
-
-    // Connect the bot to the discord API.
-    Bot.ExecuteAndWait(async () =>
-        {
+        // Connect the bot to the discord API.
+        Bot.ExecuteAndWait(async () =>
+            {
             // TODO make this connect to api token
             BotConnector MyBotConnector = new BotConnector();
-            await Bot.Connect(BotConnector.GetAPIToken(), TokenType.Bot);
-            Bot.SetGame("Testing biatch!");
-        });
+                await Bot.Connect(BotConnector.GetAPIToken(), TokenType.Bot);
+                Bot.SetGame("Testing biatch!");
+            });
     }
 }

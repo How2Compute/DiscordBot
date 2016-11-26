@@ -73,14 +73,13 @@ internal class DataModule
 {
     private List<UnspecificUserInfo> UsersInfos;
 
-    Modules Modules;
+    private Modules Modules;
 
     public DataModule(Modules BotModules)
     {
         Modules = BotModules;
 
         UsersInfos = Modules.SaveModule.LoadUserData();
-
     }
 
     // Gets the info about specified user.

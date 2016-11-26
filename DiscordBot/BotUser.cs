@@ -1,11 +1,6 @@
 ﻿// Structctor1.cs
-using Discord;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-
-
 
 // Struct for user search results
 public struct UserSearchResult
@@ -53,11 +48,6 @@ internal class BotUser
         int XPToAdd = RandomNumberGen.Next(10, 25); // TODO make these params!
         Modules.XPModule.AddXP(XPToAdd, UserID);
     }
-
-    
-
-    
-    
 }
 
 // TODO make 1 central update function that accept like the user and the new struct or only the new struct (for server specific user info?)

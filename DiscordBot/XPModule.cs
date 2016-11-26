@@ -2,8 +2,7 @@
 
 internal class XPModule
 {
-    static TimeSpan TIMEBETWEENXPGAINS = new TimeSpan(0, 1, 0);
-
+    private static TimeSpan TIMEBETWEENXPGAINS = new TimeSpan(0, 1, 0);
 
     private Modules Modules;
 
